@@ -33,7 +33,7 @@ class PasswordListViewModel(
         private set
     fun onEvent(event: PasswordListEvent) {
         when(event) {
-            PasswordListEvent.AddPhotoClicked -> TODO()
+
             PasswordListEvent.DeletePassword -> {
                 viewModelScope.launch {
                     _state.value.selectedPassword?.id?.let { id ->
@@ -147,6 +147,7 @@ class PasswordListViewModel(
                     isSelectedPasswordSheepOpen = true,
                 ) }
             }
+            else -> Unit
         }
     }
 }

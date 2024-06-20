@@ -25,7 +25,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import ru.zhogin.passwordsholder.core.presentation.CustomBottomSheet
 import ru.zhogin.passwordsholder.passwords.domain.Password
 import ru.zhogin.passwordsholder.passwords.presentation.PasswordListEvent
 import ru.zhogin.passwordsholder.passwords.presentation.PasswordListState

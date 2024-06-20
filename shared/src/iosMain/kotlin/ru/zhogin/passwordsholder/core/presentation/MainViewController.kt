@@ -10,6 +10,7 @@ import ru.zhogin.passwordsholder.di.AppModule
 //    App(
 //        darkTheme = isDarkTheme,
 //        dynamicColor = false,
-//        appModule = AppModule()
+//        appModule = AppModule(),
+//        imagePicker = ImagePickerFactory(LocalUIViewController.current).createPicker(
 //    )
 //}

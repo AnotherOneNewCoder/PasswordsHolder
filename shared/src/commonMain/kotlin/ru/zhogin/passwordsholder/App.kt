@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import dev.icerock.moko.mvvm.compose.getViewModel
 import dev.icerock.moko.mvvm.compose.viewModelFactory
 import ru.zhogin.passwordsholder.core.presentation.AppTheme
+import ru.zhogin.passwordsholder.core.presentation.ImagePicker
 import ru.zhogin.passwordsholder.di.AppModule
 import ru.zhogin.passwordsholder.passwords.presentation.PasswordListViewModel
 import ru.zhogin.passwordsholder.passwords.presentation.PasswordsListScreen
@@ -19,6 +20,7 @@ fun App(
     darkTheme: Boolean,
     dynamicColor: Boolean,
     appModule: AppModule,
+    imagePicker: ImagePicker,
 ) {
     AppTheme(
         darkTheme = darkTheme,
@@ -38,7 +40,8 @@ fun App(
             PasswordsListScreen(
                 state = state,
                 newPassword = viewModel.newPassword,
-                onEvent = viewModel::onEvent
+                onEvent = viewModel::onEvent,
+                imagePicker = imagePicker
             )
         }
     }

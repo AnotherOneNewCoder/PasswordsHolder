@@ -1,4 +1,4 @@
-package ru.zhogin.passwordsholder.core.presentation
+package ru.zhogin.passwordsholder.passwords.presentation.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween

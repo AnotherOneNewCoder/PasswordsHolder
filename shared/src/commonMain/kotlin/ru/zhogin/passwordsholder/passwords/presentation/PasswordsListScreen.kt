@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import ru.zhogin.passwordsholder.core.presentation.ImagePicker
 import ru.zhogin.passwordsholder.passwords.domain.Password
 import ru.zhogin.passwordsholder.passwords.presentation.components.AddPasswordSheet
 import ru.zhogin.passwordsholder.passwords.presentation.components.PasswordListItem
@@ -28,7 +29,11 @@ fun PasswordsListScreen(
     state: PasswordListState,
     newPassword: Password?,
     onEvent: (PasswordListEvent) -> Unit,
+    imagePicker: ImagePicker,
 ) {
+    imagePicker.RegisterPicker { imageBytes ->
+        onEvent(PasswordListEvent.OnPhotoClicked(imageBytes))
+    }
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
@@ -74,6 +79,11 @@ fun PasswordsListScreen(
         state = state,
         newPassword = newPassword,
         isOpen = state.isAddPasswordSheetOpen,
-        onEvent = onEvent,
+        onEvent = { event ->
+            if (event is PasswordListEvent.AddPhotoClicked) {
+                imagePicker.pickImage()
+            }
+            onEvent(event)
+        },
     )
 }

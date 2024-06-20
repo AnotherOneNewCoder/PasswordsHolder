@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.ui.platform.LocalContext
 import ru.zhogin.passwordsholder.App
+import ru.zhogin.passwordsholder.core.presentation.ImagePickerFactory
 import ru.zhogin.passwordsholder.di.AppModule
 
 class MainActivity : ComponentActivity() {
@@ -15,7 +16,8 @@ class MainActivity : ComponentActivity() {
             App(
                 darkTheme = isSystemInDarkTheme(),
                 dynamicColor = true,
-                appModule = AppModule(LocalContext.current.applicationContext)
+                appModule = AppModule(LocalContext.current.applicationContext),
+                imagePicker = ImagePickerFactory().createPicker()
             )
         }
     }
