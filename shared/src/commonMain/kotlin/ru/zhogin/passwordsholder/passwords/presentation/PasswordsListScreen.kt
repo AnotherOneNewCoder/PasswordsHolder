@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import ru.zhogin.passwordsholder.core.presentation.ImagePicker
 import ru.zhogin.passwordsholder.passwords.domain.Password
 import ru.zhogin.passwordsholder.passwords.presentation.components.AddPasswordSheet
+import ru.zhogin.passwordsholder.passwords.presentation.components.PasswordDetailSheet
 import ru.zhogin.passwordsholder.passwords.presentation.components.PasswordListItem
 
 @Composable
@@ -75,6 +76,11 @@ fun PasswordsListScreen(
             }
         }
     }
+    PasswordDetailSheet(
+        isOpen = state.isSelectedPasswordSheepOpen,
+        selectedPassword = state.selectedPassword,
+        onEvent = onEvent,
+    )
     AddPasswordSheet(
         state = state,
         newPassword = newPassword,
