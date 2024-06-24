@@ -31,10 +31,13 @@ fun PasswordsListScreen(
     newPassword: Password?,
     onEvent: (PasswordListEvent) -> Unit,
     imagePicker: ImagePicker,
+    modifier: Modifier = Modifier,
 ) {
     imagePicker.RegisterPicker { imageBytes ->
         onEvent(PasswordListEvent.OnPhotoClicked(imageBytes))
     }
+
+
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
@@ -51,7 +54,7 @@ fun PasswordsListScreen(
         }
     ) {
         LazyColumn(
-            modifier = Modifier.fillMaxSize(),
+            modifier = modifier.fillMaxSize(),
             contentPadding = PaddingValues(vertical = 16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
@@ -63,7 +66,7 @@ fun PasswordsListScreen(
                     fontWeight = FontWeight.Bold
                 )
             }
-            items(state.password) {password ->
+            items(state.password) { password ->
                 PasswordListItem(
                     password = password,
                     modifier = Modifier

@@ -43,7 +43,7 @@ class PasswordListViewModel(
                             )
                         }
                         passwordDataSource.deletePassword(id)
-                        delay(300L) // animation delay
+                        delay(500L) // animation delay
                         _state.update {
                             it.copy(
                                 selectedPassword = null
@@ -64,7 +64,7 @@ class PasswordListViewModel(
                             validationLoginError = null,
                         )
                     }
-                    delay(300L) // animation delay
+                    delay(500L) // animation delay
                     newPassword = null
                     _state.update {
                         it.copy(selectedPassword = null)
@@ -128,7 +128,7 @@ class PasswordListViewModel(
                         ) }
                         viewModelScope.launch {
                             passwordDataSource.insertPassword(password)
-                            delay(300L) // animation delay
+                            delay(500L) // animation delay
                             newPassword = null
                         }
                     } else {

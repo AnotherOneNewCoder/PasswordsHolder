@@ -1,0 +1,26 @@
+CREATE TABLE IF NOT EXISTS entranceEntity (
+    id INTEGER NOT NULL PRIMARY KEY,
+    pass TEXT NOT NULL,
+    createdAt INTEGER NOT NULL
+);
+
+insertEntranceEntity:
+INSERT OR REPLACE
+INTO entranceEntity(
+    id,
+    pass,
+    createdAt
+) VALUES (?, ?, ?);
+
+deleteEntranceEntity:
+DELETE FROM entranceEntity
+WHERE id = :id;
+
+selectEntranceEntity:
+SELECT *
+FROM entranceEntity
+WHERE id = :id;
+
+getEntrance:
+SELECT *
+FROM entranceEntity;

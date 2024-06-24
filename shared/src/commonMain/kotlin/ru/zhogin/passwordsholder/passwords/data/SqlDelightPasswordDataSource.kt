@@ -12,15 +12,17 @@ import kotlinx.coroutines.supervisorScope
 import kotlinx.datetime.Clock
 import ru.zhogin.passwordsholder.core.data.ImageStorage
 import ru.zhogin.passwordsholder.database.PasswordDatabase
+import ru.zhogin.passwordsholder.passwords.domain.Entrance
 import ru.zhogin.passwordsholder.passwords.domain.Password
 import ru.zhogin.passwordsholder.passwords.domain.PasswordDataSource
 
 class SqlDelightPasswordDataSource(
    db: PasswordDatabase,
-   private val imageStorage: ImageStorage
+   private val imageStorage: ImageStorage,
 ) : PasswordDataSource {
 
    private val queries = db.passwordQueries
+   private val entranceQueries = db.entranceQueries
    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
    override fun getPasswords(): Flow<List<Password>> {
       return queries
@@ -59,4 +61,27 @@ class SqlDelightPasswordDataSource(
       }
       queries.deletePasswordEntity(id)
    }
+
+   override fun getEntrance(): Flow<List<Entrance>> {
+      return entranceQueries.getEntrance()
+         .asFlow()
+         .mapToList(ioDispatcher)
+         .map { list->
+            list.map { it.toEntrance() }
+         }
+   }
+
+   override suspend fun insertEntrance(entrance: Entrance) {
+      return entranceQueries.insertEntranceEntity(
+         id = entrance.id,
+         pass = entrance.pass,
+         createdAt = Clock.System.now().toEpochMilliseconds(),
+      )
+   }
+
+   override suspend fun deleteEntrance(id: Long) {
+      return entranceQueries.deleteEntranceEntity(id)
+   }
+
+
 }
