@@ -1,6 +1,8 @@
 package ru.zhogin.passwordsholder.passwords.presentation.components
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,6 +28,10 @@ import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,6 +40,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import ru.zhogin.passwordsholder.core.presentation.ClipboardManager
 import ru.zhogin.passwordsholder.passwords.domain.Password
 import ru.zhogin.passwordsholder.passwords.presentation.PasswordListEvent
 
@@ -150,6 +157,7 @@ private fun EditRow(
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun PasswordInfoSection(
     title: String,
@@ -157,6 +165,9 @@ private fun PasswordInfoSection(
     icon: ImageVector,
     modifier: Modifier = Modifier,
 ) {
+    var copy by rememberSaveable {
+        mutableStateOf(false)
+    }
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
@@ -183,10 +194,17 @@ private fun PasswordInfoSection(
             )
             Text(
                 text = value,
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().combinedClickable(
+                    onLongClick = {copy = true},
+                    onClick = {}
+                ),
                 color = MaterialTheme.colorScheme.secondary,
                 fontSize = 18.sp
             )
+            if (copy) {
+                ClipboardManager(text = value)
+                copy = false
+            }
         }
     }
 }
