@@ -83,14 +83,7 @@ sqldelight {
         }
     }
 }
-//sqldelight {
-//
-//    database("PasswordDatabase") {
-//        packageName = "ru.zhogin.passwordsholder.database"
-//        sourceFolders = listOf("sqldelight")
-//    }
-//
-//}
+
 
 dependencies {
     implementation(libs.androidx.core)
