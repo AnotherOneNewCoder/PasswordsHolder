@@ -46,7 +46,7 @@ fun PasswordDetailSheet(
 ) {
     CustomBottomSheet(
         visible = isOpen,
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxSize(),
     ) {
         Box(
             modifier = Modifier.fillMaxSize(),
@@ -69,7 +69,8 @@ fun PasswordDetailSheet(
                         textAlign = TextAlign.Center,
                         modifier = Modifier.fillMaxWidth(),
                         fontWeight = FontWeight.Bold,
-                        fontSize = 30.sp
+                        fontSize = 30.sp,
+                        color = MaterialTheme.colorScheme.secondary,
                     )
                 }
                 Spacer(Modifier.height(16.dp))
@@ -106,7 +107,8 @@ fun PasswordDetailSheet(
             ) {
                 Icon(
                     imageVector = Icons.Rounded.Close,
-                    contentDescription = "Close"
+                    contentDescription = "Close",
+                    tint = MaterialTheme.colorScheme.secondary,
                 )
             }
 

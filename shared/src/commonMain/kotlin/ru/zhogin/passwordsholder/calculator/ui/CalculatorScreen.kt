@@ -33,7 +33,8 @@ fun CalculatorScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White)
+            //.background(Color.White)
+            .background(MaterialTheme.colorScheme.background)
             .padding(16.dp)
     ) {
         Column(
@@ -51,7 +52,7 @@ fun CalculatorScreen(
                     .padding(vertical = 32.dp),
                 fontWeight = FontWeight.Light,
                 fontSize = 68.sp,
-                color = MaterialTheme.colorScheme.primaryContainer,
+                color = MaterialTheme.colorScheme.onBackground,
                 maxLines = 2
             )
             Row(
@@ -69,6 +70,7 @@ fun CalculatorScreen(
                         onAction(CalculatorAction.Clear)
                     } else {
                         onNavPassScreen()
+                        onAction(CalculatorAction.Clear)
                     }
                 }
                 CalculatorButton(

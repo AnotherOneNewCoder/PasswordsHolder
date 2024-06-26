@@ -65,21 +65,5 @@ fun App(
                 )
             }
         }
-//        Surface(
-//            modifier = Modifier.fillMaxSize(),
-//            color = MaterialTheme.colorScheme.background,
-//        ) {
-//            CalculatorScreen(
-//                calculatorState = calculatorState,
-//                onAction = calculatorViewModel::onAction,
-//
-//            )
-////            PasswordsListScreen(
-////                state = state,
-////                newPassword = viewModel.newPassword,
-////                onEvent = viewModel::onEvent,
-////                imagePicker = imagePicker
-////            )
-//        }
     }
 }

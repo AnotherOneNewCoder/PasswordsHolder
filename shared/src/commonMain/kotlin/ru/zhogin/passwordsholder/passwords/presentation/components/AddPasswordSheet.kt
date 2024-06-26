@@ -39,7 +39,8 @@ fun AddPasswordSheet(
 ) {
     CustomBottomSheet(
         visible = isOpen,
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxSize(),
+        //modifier = modifier.fillMaxWidth(),
     ) {
         Box(
             modifier = Modifier.fillMaxSize(),
@@ -124,7 +125,8 @@ fun AddPasswordSheet(
             ) {
                 Icon(
                     imageVector = Icons.Rounded.Close,
-                    contentDescription = "Dismiss"
+                    contentDescription = "Dismiss",
+                    tint = MaterialTheme.colorScheme.secondary,
                 )
             }
         }
