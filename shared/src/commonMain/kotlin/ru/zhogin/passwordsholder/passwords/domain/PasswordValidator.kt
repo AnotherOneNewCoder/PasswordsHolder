@@ -8,9 +8,11 @@ object PasswordValidator {
         if (password.name.isBlank()) {
             result = result.copy(nameError = "The title field can't be empty")
         }
+
         if (password.login.isBlank()) {
             result = result.copy(nameError = "The login field can't be empty")
         }
+
         if (password.pass.isBlank()) {
             result = result.copy(nameError = "The password field can't be empty")
         }

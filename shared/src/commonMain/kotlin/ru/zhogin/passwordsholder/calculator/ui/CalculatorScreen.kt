@@ -1,6 +1,7 @@
 package ru.zhogin.passwordsholder.calculator.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,12 +10,12 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -22,6 +23,7 @@ import androidx.compose.ui.unit.sp
 import ru.zhogin.passwordsholder.calculator.CalculatorAction
 import ru.zhogin.passwordsholder.calculator.CalculatorOperation
 import ru.zhogin.passwordsholder.calculator.CalculatorState
+import ru.zhogin.passwordsholder.core.presentation.LockScreenOrientation
 
 @Composable
 fun CalculatorScreen(
@@ -29,6 +31,7 @@ fun CalculatorScreen(
     onAction: (CalculatorAction) -> Unit,
     onNavPassScreen: () -> Unit,
 ) {
+    LockScreenOrientation(1)
     val buttonSpacing = 8.dp
     Box(
         modifier = Modifier
@@ -49,11 +52,15 @@ fun CalculatorScreen(
                 textAlign = TextAlign.End,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 32.dp),
+                    .padding(vertical = 32.dp).horizontalScroll(rememberScrollState()),
                 fontWeight = FontWeight.Light,
-                fontSize = 68.sp,
+                fontSize = if (calculatorState.number1.length > 5 || calculatorState.number2.length > 5){
+                    52.sp
+                } else {
+                    68.sp
+                },
                 color = MaterialTheme.colorScheme.onBackground,
-                maxLines = 2
+                maxLines = 1
             )
             Row(
                 modifier = Modifier

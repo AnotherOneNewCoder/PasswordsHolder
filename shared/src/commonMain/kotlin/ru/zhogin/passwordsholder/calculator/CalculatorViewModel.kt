@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import ru.zhogin.passwordsholder.core.data.secret
 import ru.zhogin.passwordsholder.passwords.domain.Entrance
 import ru.zhogin.passwordsholder.passwords.domain.PasswordDataSource
 
@@ -63,7 +64,28 @@ class CalculatorViewModel(
 
             is CalculatorAction.Operation -> enterOperation(action.operation)
             is CalculatorAction.Decimal -> enterDecimal()
-            is CalculatorAction.Calculate -> calculate()
+            is CalculatorAction.Calculate ->
+                if (_state.value.number2 == secret && _state.value.operation is CalculatorOperation.Multiply) {
+                    viewModelScope.launch {
+                        passwordDataSource.deleteEntrance(1)
+                        _state.update {
+                            _state.value.copy(
+                                number1 = "",
+                                secret = null,
+                                operation = null,
+                            )
+                        }
+                    }
+                    _state.update {
+                        _state.value.copy(
+                            number1 = "",
+                            number2 = "",
+                            operation = null,
+                        )
+                    }
+                } else {
+                    calculate()
+                }
         }
     }
 
@@ -146,8 +168,6 @@ class CalculatorViewModel(
     }
 
     private fun enterNumber(number: Int) {
-
-
         if (_state.value.operation == null) {
             if (_state.value.number1.length >= MAX_NUM_LENGTH) {
                 return
@@ -168,7 +188,6 @@ class CalculatorViewModel(
             )
         }
     }
-
 
     companion object {
         private const val MAX_NUM_LENGTH = 8
